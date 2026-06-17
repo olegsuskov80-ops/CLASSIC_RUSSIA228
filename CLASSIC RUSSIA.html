@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>CLASSIC RUSSIA</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+html,body{
+width:100%;
+height:100%;
+background:#050505;
+overflow-x:hidden;
+}
+
+body{
+position:relative;
+}
+
+/* ФОН */
+
+.background{
+position:fixed;
+inset:0;
+background:url("background.jpg") center center/cover no-repeat;
+z-index:-3;
+}
+
+.overlay{
+position:fixed;
+inset:0;
+background:
+linear-gradient(
+to bottom,
+rgba(0,0,0,.55),
+rgba(0,0,0,.85)
+);
+z-index:-2;
+}
+
+/* ЧАСТИЦЫ */
+
+.particles{
+position:fixed;
+inset:0;
+overflow:hidden;
+pointer-events:none;
+z-index:-1;
+}
+
+.particles span{
+position:absolute;
+width:3px;
+height:3px;
+border-radius:50%;
+background:white;
+opacity:.25;
+animation:fly linear infinite;
+}
+
+@keyframes fly{
+
+from{
+transform:translateY(120vh);
+}
+
+to{
+transform:translateY(-100px);
+}
+
+}
+
+/* КОНТЕНТ */
+
+.container{
+width:100%;
+max-width:900px;
+margin:auto;
+padding-bottom:50px;
+}
+
+/* БАННЕР */
+
+.banner{
+width:100%;
+}
+
+.banner img{
+width:100%;
+display:block;
+}
+
+/* КНОПКА */
+
+.download{
+display:block;
+
+width:92%;
+
+margin:20px auto;
+
+padding:20px;
+
+border:none;
+
+border-radius:18px;
+
+background:
+linear-gradient(
+180deg,
+#ff3535,
+#a50000
+);
+
+color:white;
+
+font-size:1.4rem;
+
+font-weight:900;
+
+letter-spacing:1px;
+
+cursor:pointer;
+
+box-shadow:
+0 0 40px rgba(255,0,0,.4);
+
+transition:.25s;
+}
+
+.download:hover{
+transform:translateY(-3px);
+}
+
+.download:active{
+transform:scale(.98);
+}
+
+/* ПРОГРЕСС */
+
+.progressBox{
+display:none;
+width:92%;
+margin:0 auto 20px;
+}
+
+.progressText{
+color:white;
+text-align:center;
+margin-bottom:8px;
+}
+
+.progress{
+width:100%;
+height:12px;
+background:#111;
+border-radius:20px;
+overflow:hidden;
+}
+
+.progressFill{
+width:0%;
+height:100%;
+
+background:
+linear-gradient(
+90deg,
+#ff0000,
+#ff6666
+);
+}
+
+/* ЛОГО */
+
+.logo{
+margin-top:15px;
+text-align:center;
+}
+
+.classic{
+display:block;
+
+font-size:4rem;
+
+font-weight:900;
+
+letter-spacing:6px;
+
+color:#ff2020;
+
+text-shadow:
+0 0 20px red,
+0 0 50px red;
+}
+
+.russia{
+display:block;
+
+font-size:4rem;
+
+font-weight:900;
+
+letter-spacing:6px;
+
+color:white;
+
+text-shadow:
+0 0 25px rgba(255,255,255,.4);
+}
+
+/* ЛИНИЯ */
+
+.line{
+width:90px;
+height:4px;
+
+margin:15px auto 25px;
+
+background:
+linear-gradient(
+90deg,
+transparent,
+#ff0000,
+transparent
+);
+}
+
+/* ОПИСАНИЕ */
+
+.description{
+width:90%;
+
+margin:auto;
+
+text-align:center;
+
+color:#d5d5d5;
+
+font-size:1.05rem;
+
+line-height:1.8;
+}
+
+/* БЕЙДЖИ */
+
+.badges{
+display:flex;
+
+justify-content:center;
+
+flex-wrap:wrap;
+
+gap:10px;
+
+margin-top:25px;
+}
+
+.badges span{
+
+padding:10px 16px;
+
+background:#111;
+
+border:1px solid #222;
+
+border-radius:12px;
+
+color:white;
+
+font-size:.9rem;
+
+box-shadow:
+0 0 20px rgba(255,255,255,.04);
+
+}
+
+.footer{
+
+margin-top:25px;
+
+text-align:center;
+
+color:#777;
+
+font-size:.85rem;
+
+}
+
+@media(max-width:600px){
+
+.classic,
+.russia{
+font-size:2.8rem;
+}
+
+.description{
+font-size:.95rem;
+}
+
+.download{
+font-size:1.1rem;
+}
+
+}
+
+</style>
+</head>
+<body>
+
+<div class="background"></div>
+<div class="overlay"></div>
+
+<div class="particles" id="particles"></div>
+
+<div class="container">
+
+<div class="banner">
+<img src="logg.jpg" alt="CLASSIC RUSSIA">
+</div>
+
+<button class="download" id="downloadBtn">
+СКАЧАТЬ ЛАУНЧЕР
+</button>
+
+<div class="progressBox" id="progressBox">
+
+<div class="progressText">
+Загрузка:
+<span id="percent">0</span>%
+</div>
+
+<div class="progress">
+<div class="progressFill" id="progressFill"></div>
+</div>
+
+</div>
+
+<div class="logo">
+<span class="classic">CLASSIC</span>
+<span class="russia">RUSSIA</span>
+</div>
+
+<div class="line"></div>
+
+<div class="description">
+Ролевая онлайн-игра нового поколения.
+Создавай собственную историю,
+зарабатывай деньги, покупай автомобили,
+развивай бизнес и стань легендой сервера.
+</div>
+
+<div class="badges">
+
+<span>📱 Android</span>
+
+<span>🎮 MMO</span>
+
+<span>🚗 RP</span>
+
+<span>⚡ Online</span>
+
+</div>
+
+<div class="footer">
+🔒 ОФИЦИАЛЬНЫЙ ЛАУНЧЕР
+</div>
+
+</div>
+
+<script>
+
+/* ЧАСТИЦЫ */
+
+const particles =
+document.getElementById("particles");
+
+for(let i=0;i<80;i++){
+
+const p =
+document.createElement("span");
+
+p.style.left =
+Math.random()*100+"%";
+
+p.style.animationDuration =
+(8+Math.random()*15)+"s";
+
+p.style.opacity =
+Math.random()*0.5+0.1;
+
+particles.appendChild(p);
+
+}
+
+/* КНОПКА СКАЧИВАНИЯ */
+
+const btn =
+document.getElementById("downloadBtn");
+
+const progressBox =
+document.getElementById("progressBox");
+
+const progressFill =
+document.getElementById("progressFill");
+
+const percent =
+document.getElementById("percent");
+
+btn.addEventListener("click",()=>{
+
+progressBox.style.display="block";
+
+let value = 0;
+
+const timer = setInterval(()=>{
+
+value++;
+
+progressFill.style.width =
+value+"%";
+
+percent.textContent =
+value;
+
+if(value >= 100){
+
+clearInterval(timer);
+
+/* ОТКРЫТИЕ ССЫЛКИ НА ЯНДЕКС ДИСК */
+window.open("https://disk.yandex.ru/d/JLfiDz-sdPCUYA", "_blank");
+
+}
+
+},20);
+
+});
+
+</script>
+
+</body>
+</html>
